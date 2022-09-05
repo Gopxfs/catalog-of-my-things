@@ -1,5 +1,5 @@
-require_relative './item'
-require_relative './app'
+require_relative '../item'
+require_relative '../app'
 require 'date'
 
 class MusicAlbum < Item
