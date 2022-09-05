@@ -1,3 +1,5 @@
+require_relative './exit_app'
+
 def display_menu(app)
     puts "\nWelcome to our Catalog!"
     puts "\nPlease choose a task by entering a number:"
