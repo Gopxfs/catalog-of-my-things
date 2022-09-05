@@ -9,4 +9,11 @@ class Game < Item
     @last_played_at = Date.parse(last_played_at) # last_played_at should be a string = 'DD-MM-YYYY' or 'DD/MM/YYYY'
   end
 
+  private
+
+  def can_be_archived?
+    return true if super && DateTime.now.year - @last_played_at.year > 2
+
+    false
+  end
 end
