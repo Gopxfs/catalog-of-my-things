@@ -27,6 +27,9 @@ class Item
 
   private
 
+  attr_reader :id
+  attr_accessor :archived
+
   def can_be_archived?
     return true if DateTime.now.year - @publish_date.year > 10
 
