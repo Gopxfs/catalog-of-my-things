@@ -2,7 +2,6 @@ require 'date'
 
 class Item
   attr_accessor :publish_date
-  attr_reader :id, :archived
 
   def initialize(id, publish_date, archived: false)
     @id = id
@@ -27,6 +26,9 @@ class Item
   end
 
   private
+
+  attr_reader :id
+  attr_accessor :archived
 
   def can_be_archived?
     return true if DateTime.now.year - @publish_date.year > 10
