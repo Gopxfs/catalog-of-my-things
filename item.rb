@@ -2,6 +2,7 @@ require 'date'
 
 class Item
   attr_accessor :publish_date
+  attr_reader :id, :archived
 
   def initialize(id, publish_date, archived: false)
     @id = id
