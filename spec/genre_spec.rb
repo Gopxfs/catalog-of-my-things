@@ -1,4 +1,4 @@
-require_relative '../genre/genre' 
+require_relative '../genre/genre'
 
 describe 'Unit Tests for Genre Class' do
   before :each do
@@ -18,5 +18,4 @@ describe 'Unit Tests for Genre Class' do
       expect(@genre).to be_kind_of Item
     end
   end
-
 end
