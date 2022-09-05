@@ -23,9 +23,11 @@ To edit this project:
 :bust_in_silhouette: Alex
 - Github: [@Gopxfs](https://github.com/Gopxfs)
 - Linkedin: [Gabriel Fonseca](https://www.linkedin.com/in/gabriel-fonseca-sales)
+
 :bust_in_silhouette: Gabriel Fonseca
 - Github: [@Gopxfs](https://github.com/Gopxfs)
 - Linkedin: [Gabriel Fonseca](https://www.linkedin.com/in/gabriel-fonseca-sales)
+
 :bust_in_silhouette: Julio
 - Github: [@Gopxfs](https://github.com/Gopxfs)
 - Linkedin: [Gabriel Fonseca](https://www.linkedin.com/in/gabriel-fonseca-sales)
