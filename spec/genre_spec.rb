@@ -2,7 +2,7 @@ require_relative '../genre/genre'
 
 describe 'Unit Tests for Genre Class' do
   before :each do
-    @genre = Genre.new('MyGenre', '01/01/2022')
+    @genre = Genre.new('Genre', '01/01/2022')
   end
 
   context 'initialize object' do
@@ -19,9 +19,4 @@ describe 'Unit Tests for Genre Class' do
     end
   end
 
-  context 'genre' do
-    it 'should be "2005/06/25"' do
-      expect(@genre.publish_date).to eq('2000/01/01')
-    end
-  end
 end

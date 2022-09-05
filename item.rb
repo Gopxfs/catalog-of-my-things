@@ -1,12 +1,15 @@
-require 'date'
+require 'date' 
 
 class Item
   attr_accessor :publish_date
 
-  def initialize(id, publish_date, archived: false)
+  def initialize(id = Random.rand(1..1000))
     @id = id
-    @publish_date = Date.parse(publish_date) # publish_date should be a string = 'DD-MM-YYYY' or 'DD/MM/YYYY'
-    @archived = archived
+    @genre = nil
+    @author = nil
+    @label = nil
+    @publish_date = nil
+    @archived = false
   end
 
   def add_genre(genre)
@@ -21,18 +24,13 @@ class Item
     @label = label
   end
 
-  def move_to_archive
-    @archived = true if can_be_archived?
-  end
-
-  private
-
-  attr_reader :id
-  attr_accessor :archived
-
   def can_be_archived?
     return true if DateTime.now.year - @publish_date.year > 10
 
     false
+  end
+
+  def move_to_archive
+    @archived = true if can_be_archived?
   end
 end

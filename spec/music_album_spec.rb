@@ -2,7 +2,7 @@ require_relative '../music/music_album'
 
 describe 'Unit Tests for MusicAlbum Class' do
   before :each do
-    @album = MusicAlbum.new('y', '1991/05/21')
+    @album = MusicAlbum.new( '1982/11/30', 'yes')
   end
 
   context 'initialize object' do
