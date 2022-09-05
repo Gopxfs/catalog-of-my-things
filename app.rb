@@ -1,14 +1,12 @@
-
 class App
-    attr_accessor :books, :music_albums, :games, :authors, :labels, :genres
+  attr_accessor :books, :music_albums, :games, :authors, :labels, :genres
 
-    def initialize
-        @books = []
-        @music_albums = []
-        @games = []
-        @authors = []
-        @labels = []
-        @genres = []
-    end
-
+  def initialize
+    @books = []
+    @music_albums = []
+    @games = []
+    @authors = []
+    @labels = []
+    @genres = []
+  end
 end
