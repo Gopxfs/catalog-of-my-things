@@ -29,6 +29,19 @@ class App
     end
   end
 
+  def author_display
+    if @authors.empty?
+      puts "There isn't any author in our catalog."
+      sleep(1)
+    else
+      @authors.each_with_index do |element, idx|
+        line = "#{idx + 1}) Author: #{element.first_name} #{element.last_name}"
+        print line
+      end
+      sleep(2)
+    end
+  end
+
   def sending_message
     8.times do |i|
       print "Sending.#{'.' * (i % 3)}  \r"
@@ -42,7 +55,7 @@ class App
       puts "There isn't any game in our catalog"
     else
       @games.each_with_index do |game, idx|
-        line = "#{idx + 1}) Title: #{game.label.title} #{game.author.first_name} Last date played: #{game.last_played_at} ID: #{game.id}\n" # rubocop:disable Layout/LineLength
+        line = "#{idx + 1}) Title: #{game.label.title} Multiplayer: #{game.multiplayer} Last date played: #{game.last_played_at} ID: #{game.id}\n" # rubocop:disable Layout/LineLength
         print line
       end
       sleep(2)
@@ -50,7 +63,7 @@ class App
   end
 
   def book_create
-    title, author, genre, publisher, publish_date, cover_state, label_color = book_create_options
+    title, author, genre, publisher, publish_date, _cover_state, label_color = book_create_options
 
     book = Book.new(publish_date, publisher, cover_state)
     label = Label.new(title, label_color)
@@ -78,30 +91,37 @@ class App
   end
 
   def game_create
-    title, author, _genre, publish_date, last_played_at, multiplayer, _cover_state, label_color = game_create_options
+    title, author_first_name, author_last_name, genre, publish_date, last_played_at, multiplayer, _cover_state, label_color = game_create_options # rubocop:disable Layout/LineLength
 
     game = Game.new(publish_date, multiplayer, last_played_at)
     label = Label.new(title, label_color)
-    author = Author.new(1, author, '')
+    author = Author.new(1, author_first_name, author_last_name)
+    genre = Genre.new(genre)
 
     label.add_item(game)
     author.add_item(game)
+    genre.add_item(game)
 
     @games.push(game)
+    @authors.push(author)
+    @labels.push(label)
+    @genres.push(genre)
     sending_message
     print 'Game created successfully!'
   end
 
   def game_create_options
     title = give_option('Title: ')
-    author = give_option('Author: ')
+    author_first_name = give_option('Author - First name: ')
+    author_last_name = give_option('Author - Last name: ')
     genre = give_option('Genre: ')
     publish_date = give_option('Publish date (DD/MM/YYYY): ')
     last_played_at = give_option('Last date played (DD/MM/YYYY): ')
     multiplayer = give_option('Multiplayer: ')
     cover_state = give_option('Cover state: ')
     label_color = give_option('Label color: ')
-    [title, author, genre, publish_date, last_played_at, multiplayer, cover_state, label_color]
+    [title, author_first_name, author_last_name, genre, publish_date, last_played_at, multiplayer, cover_state,
+     label_color]
   end
 
   def give_option(option)
@@ -119,7 +139,6 @@ class App
 
     when 'Last date played (DD/MM/YYYY): '
       date = gets.chomp
-
       return date if check_date(date)
 
       puts 'Please insert a valid date.'
