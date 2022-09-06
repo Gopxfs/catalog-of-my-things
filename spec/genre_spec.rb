@@ -2,20 +2,12 @@ require_relative '../genre/genre'
 
 describe 'Unit Tests for Genre Class' do
   before :each do
-    @genre = Genre.new('Genre', '01/01/2022')
+    @genre = Genre.new('Genre')
   end
 
   context 'initialize object' do
     it 'should be an instance of Genre' do
       expect(@genre).to be_instance_of Genre
-    end
-
-    it 'should not be an instance of Item' do
-      expect(@genre).not_to be_instance_of Item
-    end
-
-    it 'should be a kind of Item' do
-      expect(@genre).to be_kind_of Item
     end
   end
 
@@ -28,10 +20,6 @@ describe 'Unit Tests for Genre Class' do
       expect(@genre).to respond_to(:name)
     end
 
-    it 'should respond to publish_date' do
-      expect(@genre).to respond_to(:publish_date)
-    end
-
     it 'should respond to items' do
       expect(@genre).to respond_to(:items)
     end
@@ -39,7 +27,7 @@ describe 'Unit Tests for Genre Class' do
 
   context 'method add_item' do
     it 'should add an item to the genre' do
-      item = Item.new('Item')
+      item = Item.new('30/11/1982')
       @genre.add_item(item)
       expect(@genre.items).to include(item)
     end

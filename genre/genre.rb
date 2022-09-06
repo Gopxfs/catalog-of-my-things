@@ -1,15 +1,13 @@
 require 'date'
 require_relative '../item'
 
-class Genre < Item
+class Genre
   attr_accessor :name, :items
-  attr_reader :id, :publish_date
+  attr_reader :id
 
-  def initialize(name, publish_date)
-    super(id = Random.rand(1..10_000))
+  def initialize(name)
     @name = name
-    @publish_date = Date.parse(publish_date)
-    @id = id
+    @id = Random.rand(1..10_000)
     @items = []
   end
 
