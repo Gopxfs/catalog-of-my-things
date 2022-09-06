@@ -91,7 +91,7 @@ class App
   end
 
   def game_create
-    title, author_first_name, author_last_name, genre, publish_date, last_played_at, multiplayer, cover_state, label_color = game_create_options
+    title, author_first_name, author_last_name, genre, publish_date, last_played_at, multiplayer, _cover_state, label_color = game_create_options # rubocop:disable Layout/LineLength
 
     game = Game.new(publish_date, multiplayer, last_played_at)
     label = Label.new(title, label_color)
