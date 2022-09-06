@@ -2,7 +2,7 @@ require_relative './spec_helper'
 
 describe Label do
   before :each do
-    @label = Label.new(1, 'title', 'color')
+    @label = Label.new('title', 'color')
   end
 
   describe '#new' do
@@ -12,7 +12,7 @@ describe Label do
   end
 
   describe '#add_item' do
-    item = Item.new(1, '05/09/2022')
+    item = Item.new('05/09/2022')
     it 'adds an item to the items collection' do
       @label.add_item(item)
       expect(@label.items[0]).to eql item
