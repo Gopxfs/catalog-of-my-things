@@ -2,7 +2,7 @@ require_relative '../music/music_album'
 
 describe 'Unit Tests for MusicAlbum Class' do
   before :each do
-    @album = MusicAlbum.new('1982/11/30', 'yes')
+    @album = MusicAlbum.new('30/11/1982', 'false')
   end
 
   context 'initialize object' do
@@ -18,4 +18,22 @@ describe 'Unit Tests for MusicAlbum Class' do
       expect(@album).to be_kind_of Item
     end
   end
+
+  context 'method can_be_archived?' do
+    it 'should return true if on_spotify is true' do
+      expect(@album.can_be_archived?).to be true
+    end
+
+    it 'should return true  even if on_spotify is false' do
+      @album.on_spotify = false
+      expect(@album.can_be_archived?).to be true
+    end
+
+    it 'should return false if on_spotify is false and publish_date is less than 10 years ago' do
+      @album.on_spotify = false
+      @album.publish_date = Date.parse('30/11/2020')
+      expect(@album.can_be_archived?).to be false
+    end
+  end
 end
+
