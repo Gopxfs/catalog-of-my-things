@@ -4,9 +4,11 @@ require './label'
 require './author'
 require_relative './genre/genre'
 require './game'
+require 'json'
 
 class App
   attr_accessor :books, :music_albums, :games, :authors, :labels, :genres
+  DATA_DIRECTORY = './library_data/'.freeze
 
   def initialize
     @books = []
@@ -15,6 +17,7 @@ class App
     @authors = []
     @labels = []
     @genres = []
+    read_games_from_file
   end
 
   def book_display
@@ -55,7 +58,7 @@ class App
       puts "There isn't any game in our catalog"
     else
       @games.each_with_index do |game, idx|
-        line = "#{idx + 1}) Title: #{game.label.title} Multiplayer: #{game.multiplayer} Last date played: #{game.last_played_at} ID: #{game.id}\n" # rubocop:disable Layout/LineLength
+        line = "#{idx + 1}) Title: #{game.label.title}, Multiplayer: #{game.multiplayer}, Last date played: #{game.last_played_at} ID: #{game.id}\n" # rubocop:disable Layout/LineLength
         print line
       end
       sleep(2)
@@ -106,6 +109,7 @@ class App
     @authors.push(author)
     @labels.push(label)
     @genres.push(genre)
+    write_games_data
     sending_message
     print 'Game created successfully!'
   end
@@ -155,5 +159,33 @@ class App
       return Date.valid_date?(y.to_i, d.to_i, m.to_i)
     end
     false
+  end
+
+  def read_games_from_file
+    if File.exist?("#{DATA_DIRECTORY}games.json")
+      games_file = File.open("#{DATA_DIRECTORY}games.json")
+      data = JSON.parse(games_file.read)
+      data.each do |element|
+        @games << Game.new(element['publish_date'], element['multiplayer'], element['last_played_at'], element['id'])
+      end
+      games_file.close
+    else
+      @games = []
+      write_games_data
+    end
+  end
+
+  def write_games_data
+    data = if @games.length.positive?
+             @games.map do |game|
+               { publish_date: game.publish_date, multiplayer: game.multiplayer, last_played_at: game.last_played_at,
+                 id: game.id }
+             end
+           else
+             []
+           end
+    games_file = File.open("#{DATA_DIRECTORY}games.json", 'w')
+    games_file.write(JSON.pretty_generate(data))
+    games_file.close
   end
 end
