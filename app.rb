@@ -29,7 +29,6 @@ class App
     end
   end
 
-  
   def author_display
     if @authors.empty?
       puts "There isn't any author in our catalog."
@@ -56,7 +55,8 @@ class App
       puts "There isn't any game in our catalog"
     else
       @games.each_with_index do |game, idx|
-        line = "#{idx + 1}) Title: #{game.label.title} Multiplayer: #{game.multiplayer} Last date played: #{game.last_played_at} ID: #{game.id}\n" # rubocop:disable Layout/LineLength
+        line = "#{idx + 1}) Title: #{game.label.title} Multiplayer: #{game.multiplayer}
+    Last date played: #{game.last_played_at} ID: #{game.id}\n"
         print line
       end
       sleep(2)
@@ -121,7 +121,8 @@ class App
     multiplayer = give_option('Multiplayer: ')
     cover_state = give_option('Cover state: ')
     label_color = give_option('Label color: ')
-    [title, author_first_name, author_last_name, genre, publish_date, last_played_at, multiplayer, cover_state, label_color]
+    [title, author_first_name, author_last_name, genre, publish_date, last_played_at, multiplayer, cover_state,
+     label_color]
   end
 
   def give_option(option)
