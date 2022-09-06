@@ -18,4 +18,30 @@ describe 'Unit Tests for Genre Class' do
       expect(@genre).to be_kind_of Item
     end
   end
+
+  context 'methods' do
+    it 'should respond to add_item' do
+      expect(@genre).to respond_to(:add_item)
+    end
+
+    it 'should respond to name' do
+      expect(@genre).to respond_to(:name)
+    end
+
+    it 'should respond to publish_date' do
+      expect(@genre).to respond_to(:publish_date)
+    end
+
+    it 'should respond to items' do
+      expect(@genre).to respond_to(:items)
+    end
+  end
+
+  context 'method add_item' do
+    it 'should add an item to the genre' do
+      item = Item.new('Item')
+      @genre.add_item(item)
+      expect(@genre.items).to include(item)
+    end
+  end
 end
