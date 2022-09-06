@@ -139,6 +139,8 @@ class App
       return Date.valid_date?(y.to_i, d.to_i, m.to_i)
     end
     false
+  end
+  
   def music_display
     puts ''
     puts '===============   Music List   ==============='
