@@ -2,7 +2,7 @@ require 'date'
 
 class Item
   attr_accessor :publish_date
-  attr_reader :genre, :author, :label
+  attr_reader :genre, :author, :label, :id
 
   def initialize(publish_date, id = Random.rand(1..10_000), archived: false)
     @id = id
@@ -28,7 +28,6 @@ class Item
 
   private
 
-  attr_reader :id
   attr_accessor :archived
 
   def can_be_archived?
