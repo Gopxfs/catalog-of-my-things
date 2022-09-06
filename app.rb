@@ -8,6 +8,7 @@ require 'json'
 
 class App
   attr_accessor :books, :music_albums, :games, :authors, :labels, :genres
+
   DATA_DIRECTORY = './library_data/'.freeze
 
   def initialize
@@ -58,7 +59,7 @@ class App
       puts "There isn't any game in our catalog"
     else
       @games.each_with_index do |game, idx|
-        line = "#{idx + 1}) Title: #{game.label.title}, Multiplayer: #{game.multiplayer}, Last date played: #{game.last_played_at} ID: #{game.id}\n" # rubocop:disable Layout/LineLength
+        line = "#{idx + 1}) Publish date: #{game.publish_date}, Multiplayer: #{game.multiplayer}, Last date played: #{game.last_played_at} ID: #{game.id}\n" # rubocop:disable Layout/LineLength
         print line
       end
       sleep(2)
