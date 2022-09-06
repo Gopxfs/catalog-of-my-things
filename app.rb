@@ -187,6 +187,8 @@ class App
           read_music(ary)
         when 'genres'
           read_genre(ary)
+        when 'items'
+          read_music_details(ary)
         end
       else
         File.write("./data/#{file_name}.json", '[]')

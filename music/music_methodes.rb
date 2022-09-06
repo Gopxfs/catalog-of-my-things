@@ -34,9 +34,14 @@ def create_music
   authorMusic.add_item(music)
 
   music_item = Item.new(publish_date, Random.rand(0..10_000))
-  music_item.add_genre(genreMusic)
-  music_item.add_author(authorMusic)
-  music_item.add_label(label)
+
+  hash_genre = { 'value' => { 'id' => genreMusic.id, 'name' => genreMusic.name }, 'ref' => { 'music' => music } }
+  hash_label = { 'value' => { 'name' => label.title }, 'ref' => { 'music' => music_item.id } }
+  hash_author = { 'value' => { 'name' => authorMusic.first_name }, 'ref' => { 'music' => music_item.id } }
+
+  music_item.add_genre(hash_genre)
+  music_item.add_author(hash_author)
+  music_item.add_label(hash_label)
 
   @items << music_item
 
@@ -49,6 +54,10 @@ end
 def add_music(publish_date, on_spotify)
   music = MusicAlbum.new(publish_date, on_spotify)
   @music_list << music
+end
+
+def add_full_music(aMusic)
+  @items << aMusic
 end
 
 def list_labels
