@@ -167,4 +167,15 @@ class App
     @authors.push(author)
     @genres.push(genre)
   end
+
+  def label_display
+    if @labels.empty?
+      puts "There aren't any labels."
+      return sleep(1)
+    end
+    @labels.each do |label|
+      puts "[#{label.id}] #{label.title} #{label.color}"
+    end
+    sleep(2)
+  end
 end
