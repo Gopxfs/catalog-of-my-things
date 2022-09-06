@@ -119,7 +119,6 @@ class App
       return date if check_date(date)
 
       puts 'Please insert a valid date.'
-      sleep(1)
       return give_option('Publish date (DD/MM/YYYY): ')
 
     when 'Last date played (DD/MM/YYYY): '
@@ -128,7 +127,6 @@ class App
       return date if check_date(date)
 
       puts 'Please insert a valid date.'
-      sleep(1)
       return give_option('Last date played (DD/MM/YYYY): ')
     end
 
@@ -144,25 +142,15 @@ class App
   end
 
   def music_display
-    puts ''
-    puts '===============   Music List   ==============='
-    puts ''
     list_music
   end
 
   def genre_display
-    puts ''
-    puts '===============   Genre List   ==============='
-    puts ''
     list_genre
   end
 
   def music_create
     create_music
-  end
-
-  def genre_create
-    create_genre
   end
 
   def save_files
@@ -187,8 +175,6 @@ class App
           read_music(ary)
         when 'genres'
           read_genre(ary)
-        when 'items'
-          read_music_details(ary)
         end
       else
         File.write("./data/#{file_name}.json", '[]')

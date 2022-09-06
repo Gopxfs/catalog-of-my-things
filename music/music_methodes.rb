@@ -10,7 +10,7 @@ def list_music
   end
 end
 
-def create_music
+def create_music # rubocop:disable Metrics/MethodLength
   puts 'Please enter the publish date (YYYY/MM/DD):'
   publish_date = gets.chomp
   puts 'Is it on Spotify? (true/false)'
@@ -23,21 +23,14 @@ def create_music
   author = gets.chomp
 
   music = MusicAlbum.new(publish_date, on_spotify)
-  genreMusic = Genre.new(genre)
+  genre_music = Genre.new(genre)
   label = Label.new(title, 'red')
-  puts  genreMusic.name
-  puts  genreMusic.id
-  authorMusic = Author.new(Random.rand(0..10_000) ,author, '')
-  
-  label.add_item(music)
-  genreMusic.add_item(music)
-  authorMusic.add_item(music)
-
+  author_music = Author.new(Random.rand(0..10_000), author, '')
   music_item = Item.new(publish_date, Random.rand(0..10_000))
 
-  hash_genre = { 'value' => { 'id' => genreMusic.id, 'name' => genreMusic.name }, 'ref' => { 'music' => music } }
+  hash_genre = { 'value' => { 'id' => genre_music.id, 'name' => genre_music.name }, 'ref' => { 'music' => music } }
   hash_label = { 'value' => { 'name' => label.title }, 'ref' => { 'music' => music_item.id } }
-  hash_author = { 'value' => { 'name' => authorMusic.first_name }, 'ref' => { 'music' => music_item.id } }
+  hash_author = { 'value' => { 'name' => author_music.first_name }, 'ref' => { 'music' => music_item.id } }
 
   music_item.add_genre(hash_genre)
   music_item.add_author(hash_author)
@@ -45,10 +38,9 @@ def create_music
 
   @items << music_item
 
-  @genres << genreMusic
+  @genres << genre_music
   @music_list << music
   puts 'Music created successfully!'
-  sleep(1)
 end
 
 def add_music(publish_date, on_spotify)
@@ -56,8 +48,8 @@ def add_music(publish_date, on_spotify)
   @music_list << music
 end
 
-def add_full_music(aMusic)
-  @items << aMusic
+def add_full_music(a_music)
+  @items << a_music
 end
 
 def list_labels
