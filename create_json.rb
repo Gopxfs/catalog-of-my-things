@@ -6,7 +6,7 @@ def create_dir
 end
 
 def create_files
-    Dir.mkdir_p('./data')
+    Dir.mkdir('./data')
     FileUtils.touch('./data/music.json')
     FileUtils.touch('./data/genre.json')
 end

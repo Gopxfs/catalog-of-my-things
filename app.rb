@@ -163,10 +163,13 @@ class App
 
   def save_files
     instance_variables.each do |var|
-      file_name = var.to_s[1..-1]
-      File.open("./data/#{file_name}.json", 'w') do |file|
-        file.puts JSON.pretty_generate(instance_variable_get(var))
+      file_name = var.to_s.chomp('_list').delete('@')
+      ary = []
+      instance_variable_get(var).each do |obj|
+        hash = { ref: obj, value: to_hash(obj) }
+        ary << hash
       end
+      File.write("./data/#{file_name}.json", JSON.generate(ary))
     end
   end
 
