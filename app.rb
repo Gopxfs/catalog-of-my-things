@@ -97,14 +97,10 @@ class App
     author = Author.new(1, author_first_name, author_last_name)
     genre = Genre.new(genre)
 
-    label.add_item(game)
-    author.add_item(game)
-    genre.add_item(game)
-
+    add_elements(game, label, author, genre)
+    store_elements(label, author, genre)
     @games.push(game)
-    @authors.push(author)
-    @labels.push(label)
-    @genres.push(genre)
+    
     sending_message
     print 'Game created successfully!'
   end
