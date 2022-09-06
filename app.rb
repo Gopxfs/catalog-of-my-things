@@ -175,9 +175,18 @@ class App
 
   def read_files
     instance_variables.each do |var|
-      file_name = var.to_s[1..-1]
-      file = File.read("./data/#{file_name}.json")
-      instance_variable_set(var, JSON.parse(file))
+      file_name = var.to_s.chomp('_list').delete('@')
+      if File.exist?("./data/#{file_name}.json") && File.read("./data/#{file_name}.json") != ''
+        ary = JSON.parse(File.read("./data/#{file_name}.json"))
+        case file_name
+        when 'music'
+          read_music(ary)
+        when 'genre'
+          read_genre(ary)
+        end
+      else
+        File.write("./data/#{file_name}.json", '[]')
+      end
     end
   end
 

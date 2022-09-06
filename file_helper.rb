@@ -1,11 +1,7 @@
 require_relative './music/music_methodes'
 
-def read_music_file(file)
-    
-    puts ''
-    puts '===============   Music List   ==============='
-    puts ''
-    file.each_line do |line|
+def read_music(file)
+    file.each do |line|
         music_id = line['value']['id']
         music_publish_date = line['value']['publish_date']
         music_on_spotify = line['value']['on_spotify']
