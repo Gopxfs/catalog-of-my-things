@@ -4,6 +4,9 @@ require './label'
 require './author'
 require_relative './genre/genre'
 require './game'
+require_relative './library_data/load_data/read_games'
+require_relative './library_data/preserve_data/write_games'
+require 'json'
 
 class App
   attr_accessor :books, :music_albums, :games, :authors, :labels, :genres
@@ -15,6 +18,7 @@ class App
     @authors = []
     @labels = []
     @genres = []
+    read_games_from_file
   end
 
   def book_display
@@ -55,7 +59,7 @@ class App
       puts "There isn't any game in our catalog"
     else
       @games.each_with_index do |game, idx|
-        line = "#{idx + 1}) Title: #{game.label.title} Multiplayer: #{game.multiplayer} Last date played: #{game.last_played_at} ID: #{game.id}\n" # rubocop:disable Layout/LineLength
+        line = "#{idx + 1}) Publish date: #{game.publish_date}, Multiplayer: #{game.multiplayer}, Last date played: #{game.last_played_at} ID: #{game.id}\n" # rubocop:disable Layout/LineLength
         print line
       end
       sleep(2)
@@ -100,6 +104,7 @@ class App
     add_elements(game, label, author, genre)
     store_elements(label, author, genre)
     @games.push(game)
+    write_games_data
 
     sending_message
     print 'Game created successfully!'
