@@ -2,7 +2,7 @@ require 'date'
 require './book'
 require './label'
 require './author'
-# require './genre'
+require_relative './genre/genre'
 require './game'
 
 class App
@@ -24,6 +24,10 @@ class App
     else
       @books.each do |book|
         puts "[#{book.id}] '#{book.label.title}' by #{book.author.first_name} #{book.author.last_name}"
+      end
+      sleep(2)
+    end
+  end
 
   def sending_message
     8.times do |i|
@@ -38,25 +42,24 @@ class App
       puts "There isn't any game in our catalog"
     else
       @games.each_with_index do |game, idx|
-        line = "#{idx + 1}) Title: #{game.label.title} #{game.author.first_name} Last date played: #{game.last_played_at} ID: #{game.id}\n"
+        line = "#{idx + 1}) Title: #{game.label.title} #{game.author.first_name} Last date played: #{game.last_played_at} ID: #{game.id}\n" # rubocop:disable Layout/LineLength
         print line
       end
       sleep(2)
     end
   end
 
-
   def book_create
-    title, author, _genre, publisher, publish_date, cover_state, label_color = book_create_options
+    title, author, genre, publisher, publish_date, cover_state, label_color = book_create_options
 
     book = Book.new(publish_date, publisher, cover_state)
     label = Label.new(title, label_color)
     author = Author.new(1, author, '')
-    # genre = Genre.new(genre)
+    genre = Genre.new(genre)
 
     label.add_item(book)
     author.add_item(book)
-    # genre.add_item(book)
+    genre.add_item(book)
 
     @books.push(book)
     puts 'Book created successfully!'
@@ -72,9 +75,10 @@ class App
     cover_state = give_option('Cover state: ')
     label_color = give_option('Label color: ')
     [title, author, genre, publisher, publish_date, cover_state, label_color]
+  end
 
   def game_create
-    title, author, genre, publish_date, last_played_at, multiplayer, cover_state, label_color = game_create_options
+    title, author, _genre, publish_date, last_played_at, multiplayer, _cover_state, label_color = game_create_options
 
     game = Game.new(publish_date, multiplayer, last_played_at)
     label = Label.new(title, label_color)
@@ -98,7 +102,6 @@ class App
     cover_state = give_option('Cover state: ')
     label_color = give_option('Label color: ')
     [title, author, genre, publish_date, last_played_at, multiplayer, cover_state, label_color]
-
   end
 
   def give_option(option)

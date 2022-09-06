@@ -3,9 +3,9 @@ require_relative './spec_helper'
 describe Game do
   context 'When testing the Game class' do
     before :each do
-      @long_ago_played = Game.new(1, '05/09/2010', 'multiplayer', '01/08/2002')
-      @recently_played = Game.new(2, '05/09/2020', 'multiplayer', '01/08/2022')
-      @actualy_played = Game.new(3, '05/09/2000', 'multiplayer', '02/09/2022')
+      @long_ago_played = Game.new('05/09/2010', 'multiplayer', '01/08/2002')
+      @recently_played = Game.new('05/09/2020', 'multiplayer', '01/08/2022')
+      @actualy_played = Game.new('05/09/2000', 'multiplayer', '02/09/2022')
     end
 
     describe '#newGame' do
