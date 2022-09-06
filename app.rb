@@ -36,7 +36,7 @@ class App
     else
       @authors.each_with_index do |element, idx|
         line = "#{idx + 1}) Author: #{element.first_name} #{element.last_name}"
-        print line
+        puts line
       end
       sleep(2)
     end
@@ -63,18 +63,17 @@ class App
   end
 
   def book_create
-    title, author, genre, publisher, publish_date, _cover_state, label_color = book_create_options
+    title, author, genre, publisher, publish_date, cover_state, label_color = book_create_options
 
     book = Book.new(publish_date, publisher, cover_state)
     label = Label.new(title, label_color)
     author = Author.new(1, author, '')
     genre = Genre.new(genre)
 
-    label.add_item(book)
-    author.add_item(book)
-    genre.add_item(book)
-
+    add_elements(book, label, author, genre)
+    store_elements(label, author, genre)
     @books.push(book)
+
     puts 'Book created successfully!'
     sleep(1)
   end
@@ -98,14 +97,10 @@ class App
     author = Author.new(1, author_first_name, author_last_name)
     genre = Genre.new(genre)
 
-    label.add_item(game)
-    author.add_item(game)
-    genre.add_item(game)
-
+    add_elements(game, label, author, genre)
+    store_elements(label, author, genre)
     @games.push(game)
-    @authors.push(author)
-    @labels.push(label)
-    @genres.push(genre)
+
     sending_message
     print 'Game created successfully!'
   end
@@ -155,5 +150,28 @@ class App
       return Date.valid_date?(y.to_i, d.to_i, m.to_i)
     end
     false
+  end
+
+  def add_elements(item, label, author, genre)
+    label.add_item(item)
+    author.add_item(item)
+    genre.add_item(item)
+  end
+
+  def store_elements(label, author, genre)
+    @labels.push(label)
+    @authors.push(author)
+    @genres.push(genre)
+  end
+
+  def label_display
+    if @labels.empty?
+      puts "There aren't any labels."
+      return sleep(1)
+    end
+    @labels.each do |label|
+      puts "[#{label.id}] #{label.title} #{label.color}"
+    end
+    sleep(2)
   end
 end
