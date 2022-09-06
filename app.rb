@@ -29,6 +29,20 @@ class App
     end
   end
 
+  
+  def author_display
+    if @authors.empty?
+      puts "There isn't any author in our catalog."
+      sleep(1)
+    else
+      @authors.each_with_index do |element, idx|
+        line = "#{idx + 1}) Author: #{element.first_name} #{element.last_name}"
+        print line
+      end
+      sleep(2)
+    end
+  end
+
   def sending_message
     8.times do |i|
       print "Sending.#{'.' * (i % 3)}  \r"
