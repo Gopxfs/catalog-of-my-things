@@ -36,7 +36,7 @@ class App
     else
       @authors.each_with_index do |element, idx|
         line = "#{idx + 1}) Author: #{element.first_name} #{element.last_name}"
-        print line
+        puts line
       end
       sleep(2)
     end
@@ -100,7 +100,7 @@ class App
     add_elements(game, label, author, genre)
     store_elements(label, author, genre)
     @games.push(game)
-    
+
     sending_message
     print 'Game created successfully!'
   end
