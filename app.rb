@@ -55,8 +55,7 @@ class App
       puts "There isn't any game in our catalog"
     else
       @games.each_with_index do |game, idx|
-        line = "#{idx + 1}) Title: #{game.label.title} Multiplayer: #{game.multiplayer}
-    Last date played: #{game.last_played_at} ID: #{game.id}\n"
+        line = "#{idx + 1}) Title: #{game.label.title} Multiplayer: #{game.multiplayer} Last date played: #{game.last_played_at} ID: #{game.id}\n" # rubocop:disable Layout/LineLength
         print line
       end
       sleep(2)
@@ -64,7 +63,7 @@ class App
   end
 
   def book_create
-    title, author, genre, publisher, publish_date, cover_state, label_color = book_create_options
+    title, author, genre, publisher, publish_date, _cover_state, label_color = book_create_options
 
     book = Book.new(publish_date, publisher, cover_state)
     label = Label.new(title, label_color)
@@ -153,7 +152,6 @@ class App
   def check_date(date)
     if date[2] && date[5] == '/'
       d, m, y = date.split('/')
-      date = Date.parse(date)
       return Date.valid_date?(y.to_i, d.to_i, m.to_i)
     end
     false
