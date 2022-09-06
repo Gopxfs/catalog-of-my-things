@@ -1,4 +1,5 @@
 require './item'
+require 'json'
 
 class Book < Item
   attr_accessor :publisher, :cover_state
@@ -16,5 +17,16 @@ class Book < Item
     return true if super || cover_state == 'bad'
 
     false
+  end
+  
+  def to_json(*args)
+    {
+      JSON.create_id => self.class.name,
+      'properties' => [publish_date, publisher, cover_state, id, archived]
+    }.to_json(*args)
+  end
+
+  def self.json_create(object)
+    new(*object['properties'])
   end
 end
