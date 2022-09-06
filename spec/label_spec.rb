@@ -2,7 +2,7 @@ require_relative './spec_helper'
 
 describe Label do
   before :each do
-    @label = Label.new(1, 'title', 'color')
+    @label = Label.new('title', 'color')
   end
 
   describe '#new' do
