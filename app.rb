@@ -4,13 +4,16 @@ require './label'
 require './author'
 require_relative './genre/genre'
 require './game'
+require 'json'
+require_relative './music/music_methodes'
+require_relative './file_helper'
 
 class App
-  attr_accessor :books, :music_albums, :games, :authors, :labels, :genres
+  attr_accessor :books, :music_list, :games, :authors, :labels, :genres
 
   def initialize
     @books = []
-    @music_albums = []
+    @music_list = []
     @games = []
     @authors = []
     @labels = []
@@ -136,5 +139,50 @@ class App
       return Date.valid_date?(y.to_i, d.to_i, m.to_i)
     end
     false
+  def music_display
+    puts ''
+    puts '===============   Music List   ==============='
+    puts ''
+    list_music
+  end
+
+  def genre_display
+    puts ''
+    puts '===============   Genre List   ==============='
+    puts ''
+    list_labels
+  end
+
+  def music_create
+    create_music
+  end
+
+  def genre_create
+    create_genre
+  end
+
+  def save_files
+    instance_variables.each do |var|
+      file_name = var.to_s[1..-1]
+      File.open("./data/#{file_name}.json", 'w') do |file|
+        file.puts JSON.pretty_generate(instance_variable_get(var))
+      end
+    end
+  end
+
+  def read_files
+    instance_variables.each do |var|
+      file_name = var.to_s[1..-1]
+      file = File.read("./data/#{file_name}.json")
+      instance_variable_set(var, JSON.parse(file))
+    end
+  end
+
+  def to_hash(object)
+    hash = {}
+    object.instance_variables.each do |var|
+      hash[var.to_s.delete('@')] = object.instance_variable_get(var)
+    end
+    hash
   end
 end
