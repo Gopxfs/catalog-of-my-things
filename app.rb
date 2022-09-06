@@ -6,6 +6,7 @@ require_relative './genre/genre'
 require './game'
 require 'json'
 require_relative './music/music_methodes'
+require_relative './genre/genre_methods'
 require_relative './file_helper'
 
 class App
@@ -18,6 +19,7 @@ class App
     @authors = []
     @labels = []
     @genres = []
+    @items = []
   end
 
   def book_display
@@ -140,7 +142,7 @@ class App
     end
     false
   end
-  
+
   def music_display
     puts ''
     puts '===============   Music List   ==============='
@@ -152,7 +154,7 @@ class App
     puts ''
     puts '===============   Genre List   ==============='
     puts ''
-    list_labels
+    list_genre
   end
 
   def music_create
@@ -183,7 +185,7 @@ class App
         case file_name
         when 'music'
           read_music(ary)
-        when 'genre'
+        when 'genres'
           read_genre(ary)
         end
       else

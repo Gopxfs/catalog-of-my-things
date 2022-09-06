@@ -1,6 +1,8 @@
 require_relative './music_album'
 require_relative '../label'
 require_relative '../genre/genre'
+require_relative '../genre/genre_methods'
+require_relative '../item'
 
 def list_music
   @music_list.each_with_index do |music, index|
@@ -23,12 +25,22 @@ def create_music
   music = MusicAlbum.new(publish_date, on_spotify)
   genreMusic = Genre.new(genre)
   label = Label.new(title, 'red')
+  puts  genreMusic.name
+  puts  genreMusic.id
   authorMusic = Author.new(Random.rand(0..10_000) ,author, '')
   
   label.add_item(music)
   genreMusic.add_item(music)
   authorMusic.add_item(music)
 
+  music_item = Item.new(publish_date, Random.rand(0..10_000))
+  music_item.add_genre(genreMusic)
+  music_item.add_author(authorMusic)
+  music_item.add_label(label)
+
+  @items << music_item
+
+  @genres << genreMusic
   @music_list << music
   puts 'Music created successfully!'
   sleep(1)
