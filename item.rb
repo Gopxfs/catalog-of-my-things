@@ -5,11 +5,8 @@ class Item
 
   def initialize(id = Random.rand(1..10_000))
     @id = id
-    @genre = nil
     @publish_date = nil
     @archived = false
-    @author = nil
-    @label = nil
   end
 
   def add_genre(genre)
