@@ -1,6 +1,7 @@
 require 'date'
 
 class Item
+
   attr_reader :id, :genre, :publish_date, :archived, :author, :label
   
   def initialize(publish_date, id = Random.rand(1..10_000))
@@ -35,7 +36,6 @@ class Item
   end
 
   private
-
   def can_be_archived?
     return true if DateTime.now.year - @publish_date.year > 10
 
