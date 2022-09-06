@@ -63,18 +63,17 @@ class App
   end
 
   def book_create
-    title, author, genre, publisher, publish_date, _cover_state, label_color = book_create_options
+    title, author, genre, publisher, publish_date, cover_state, label_color = book_create_options
 
     book = Book.new(publish_date, publisher, cover_state)
     label = Label.new(title, label_color)
     author = Author.new(1, author, '')
     genre = Genre.new(genre)
 
-    label.add_item(book)
-    author.add_item(book)
-    genre.add_item(book)
-
+    add_elements(book, label, author, genre)
+    store_elements(label, author, genre)
     @books.push(book)
+
     puts 'Book created successfully!'
     sleep(1)
   end
@@ -155,5 +154,17 @@ class App
       return Date.valid_date?(y.to_i, d.to_i, m.to_i)
     end
     false
+  end
+
+  def add_elements(item, label, author, genre)
+    label.add_item(item)
+    author.add_item(item)
+    genre.add_item(item)
+  end
+
+  def store_elements(label, author, genre)
+    @labels.push(label)
+    @authors.push(author)
+    @genres.push(genre)
   end
 end
