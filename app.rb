@@ -65,7 +65,8 @@ class App
   def give_option(option)
     print option.to_s
 
-    if option == 'Publish date (DD/MM/YYYY): '
+    case option
+    when 'Publish date (DD/MM/YYYY): '
       date = gets.chomp
 
       return date if check_date(date)
@@ -73,7 +74,7 @@ class App
       puts 'Please insert a valid date.'
       sleep(1)
       return give_option('Publish date (DD/MM/YYYY): ')
-    elsif option == 'Last date played (DD/MM/YYYY): '
+    when 'Last date played (DD/MM/YYYY): '
       date = gets.chomp
 
       return date if check_date(date)
