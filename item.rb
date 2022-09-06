@@ -2,9 +2,9 @@ require 'date'
 
 class Item
   attr_accessor :publish_date
-  attr_reader :genre, :author, :label
+  attr_reader :genre, :author, :label, :id
 
-  def initialize(id, publish_date, archived: false)
+  def initialize(publish_date, id = Random.rand(1..10_000), archived: false)
     @id = id
     @publish_date = Date.parse(publish_date) # publish_date should be a string = 'DD-MM-YYYY' or 'DD/MM/YYYY'
     @archived = archived
@@ -28,7 +28,6 @@ class Item
 
   private
 
-  attr_reader :id
   attr_accessor :archived
 
   def can_be_archived?
