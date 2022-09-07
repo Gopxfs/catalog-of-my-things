@@ -1,26 +1,17 @@
-require 'date'
-require './book'
-require './label'
-require './author'
-require_relative './genre/genre'
-require './game'
-require_relative './library_data/load_data/read_games'
-require_relative './library_data/preserve_data/write_games'
-require_relative './library_data/load_data/read_books'
-require_relative './library_data/load_data/read_labels'
-require 'json'
+require './requires'
+# rubocop:disable all
 
-class App
-  attr_accessor :books, :music_albums, :games, :authors, :labels, :genres
+class App 
+  attr_accessor :books, :music_list, :games, :authors, :labels, :genres
 
   def initialize
     @books = load_books
-    @music_albums = []
     @games = []
-    @authors = []
-    @labels = load_labels(@books)
-    @genres = []
+    @music_list = load_musics
     read_games_from_file
+    @authors = load_authors(@books, @games, @music_list)
+    @labels = load_labels(@books, @games, @music_list)
+    @genres = load_genres(@books, @games, @music_list)
   end
 
   def book_display
@@ -136,7 +127,6 @@ class App
       return date if check_date(date)
 
       puts 'Please insert a valid date.'
-      sleep(1)
       return give_option('Publish date (DD/MM/YYYY): ')
 
     when 'Last date played (DD/MM/YYYY): '
@@ -144,7 +134,6 @@ class App
       return date if check_date(date)
 
       puts 'Please insert a valid date.'
-      sleep(1)
       return give_option('Last date played (DD/MM/YYYY): ')
     end
 
@@ -157,6 +146,26 @@ class App
       return Date.valid_date?(y.to_i, d.to_i, m.to_i)
     end
     false
+  end
+
+  def music_display
+    list_music
+  end
+
+  def genre_display
+    list_genre
+  end
+
+  def music_create
+    create_music
+  end
+
+  def to_hash(object)
+    hash = {}
+    object.instance_variables.each do |var|
+      hash[var.to_s.delete('@')] = object.instance_variable_get(var)
+    end
+    hash
   end
 
   def add_elements(item, label, author, genre)

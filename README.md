@@ -1,7 +1,7 @@
 # Catalog of our things
 
 In this project, you will create a console app that will help you to keep a record of different types of things you own: books, music albums, movies, and games. Everything will be based on the UML class diagram presented below. The data will be stored in JSON files but you will also prepare a database with tables structure analogical to your program's class structure.
-​
+
 ## Built With:
 
 - Ruby
@@ -32,9 +32,9 @@ To edit this project:
 - Open the repository you cloned with a code editor that you like.
 
 - Edit the code as you want.
-​
+
 ## Authors:
-​
+
 👤 **Alex**
 
 - Github: [![GitHub Badge](https://img.shields.io/badge/-masangana-white?logo=GitHub&logoColor=181717&style=plastic)](https://github.com/masangana)
@@ -65,4 +65,3 @@ Give a :star: if you like my project!
 ## :pencil: License
 
 This project is [MIT](https://github.com/Gopxfs/catalog-of-my-things/blob/main/LICENSE) licensed.
-​
