@@ -7,6 +7,7 @@ require './game'
 require_relative './library_data/load_data/read_games'
 require_relative './library_data/preserve_data/write_games'
 require_relative './library_data/load_data/read_books'
+require_relative './library_data/load_data/read_labels'
 require 'json'
 
 class App
@@ -17,7 +18,7 @@ class App
     @music_albums = []
     @games = []
     @authors = []
-    @labels = []
+    @labels = load_labels
     @genres = []
     read_games_from_file
   end
