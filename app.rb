@@ -6,17 +6,19 @@ require_relative './genre/genre'
 require './game'
 require_relative './library_data/load_data/read_games'
 require_relative './library_data/preserve_data/write_games'
+require_relative './library_data/load_data/read_books'
+require_relative './library_data/load_data/read_labels'
 require 'json'
 
 class App
   attr_accessor :books, :music_albums, :games, :authors, :labels, :genres
 
   def initialize
-    @books = []
+    @books = load_books
     @music_albums = []
     @games = []
     @authors = []
-    @labels = []
+    @labels = load_labels(@books)
     @genres = []
     read_games_from_file
   end

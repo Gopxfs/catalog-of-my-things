@@ -1,4 +1,5 @@
 require './item'
+require 'json'
 
 class Book < Item
   attr_accessor :publisher, :cover_state
