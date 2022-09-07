@@ -2,19 +2,17 @@ require 'json'
 require './book'
 
 def load_books
-  return [] unless file_exist?
-  return [] if File.zero?('./library_data/data/books.json')
+  file = './library_data/data/books.json'
 
-  books = JSON.parse(File.read('./library_data/data/books.json'))
+  return [] unless File.exist?(file)
+  return [] if File.zero?(file)
 
-  books.map {|book| JSON.parse(book.to_json, create_additions: true)}
+  books = []
+  books_data = JSON.parse(File.read(file))
 
-  p books[0].class
-
+  books_data.each do |book|
+    books.push(Book.new(book['publish_date'], book['publisher'], book['cover_state'], book['id']))
+  end
+  
   return books
-end
-
-def file_exist?
-  return false unless File.exist?('./library_data/data/books.json')
-  return true
 end
