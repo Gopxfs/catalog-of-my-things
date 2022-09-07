@@ -5,9 +5,12 @@ def save_items(books)
   save_item('books', books)
 end
 
-def save_item(file_name, item)
+def save_item(file_name, items)
   file = check_file(file_name)
-  File.write(file, JSON.generate(item))
+
+  items.map {|item| JSON.generate(item)}
+  
+  File.write(file, JSON.generate(items))
 end
 
 def check_directory
