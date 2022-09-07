@@ -21,9 +21,7 @@ end
 def load_items(label, items, books)
   items.each do |item|
     books.each do |book|
-      if book.id == item['item_id'] && book.class.name == item['item_class']
-        label.add_item(book)
-      end
+      label.add_item(book) if book.id == item['item_id'] && book.instance_of?(item)
     end
   end
 end
