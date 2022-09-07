@@ -26,34 +26,15 @@ def create_music # rubocop:disable Metrics/MethodLength
   genre_music = Genre.new(genre)
   label = Label.new(title, 'red')
   author_music = Author.new(Random.rand(0..10_000), author, '')
-  music_item = Item.new(publish_date, Random.rand(0..10_000))
 
-  hash_genre = { 'value' => { 'id' => genre_music.id, 'name' => genre_music.name }, 'ref' => { 'music' => music } }
-  hash_label = { 'value' => { 'name' => label.title }, 'ref' => { 'music' => music_item.id } }
-  hash_author = { 'value' => { 'name' => author_music.first_name }, 'ref' => { 'music' => music_item.id } }
+  label.add_item(music)
+  author_music.add_item(music)
+  genre_music.add_item(music)
 
-  music_item.add_genre(hash_genre)
-  music_item.add_author(hash_author)
-  music_item.add_label(hash_label)
+  @music_list.push(music)
+  @labels.push(label)
+  @authors.push(author_music)
+  @genres.push(genre_music)
 
-  @items << music_item
-
-  @genres << genre_music
-  @music_list << music
   puts 'Music created successfully!'
-end
-
-def add_music(publish_date, on_spotify)
-  music = MusicAlbum.new(publish_date, on_spotify)
-  @music_list << music
-end
-
-def add_full_music(a_music)
-  @items << a_music
-end
-
-def list_labels
-  @music_list.each_with_index do |music, index|
-    puts "(#{index}) ID: #{music.id}, Label: #{music.label}"
-  end
 end
