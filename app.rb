@@ -4,19 +4,24 @@ require './label'
 require './author'
 require_relative './genre/genre'
 require './game'
+require 'json'
+require_relative './music/music_methodes'
+require_relative './genre/genre_methods'
+require_relative './file_helper'
 require_relative './library_data/load_data/read_games'
 require_relative './library_data/preserve_data/write_games'
 require_relative './library_data/load_data/read_books'
 require_relative './library_data/load_data/read_labels'
 require 'json'
+# rubocop:disable all
 
-class App
-  attr_accessor :books, :music_albums, :games, :authors, :labels, :genres
+class App 
+  attr_accessor :books, :music_list, :games, :authors, :labels, :genres
 
   def initialize
     @books = load_books
-    @music_albums = []
     @games = []
+    @music_list = []
     read_games_from_file
     @authors = []
     @labels = load_labels(@books, @games)
@@ -136,7 +141,6 @@ class App
       return date if check_date(date)
 
       puts 'Please insert a valid date.'
-      sleep(1)
       return give_option('Publish date (DD/MM/YYYY): ')
 
     when 'Last date played (DD/MM/YYYY): '
@@ -144,7 +148,6 @@ class App
       return date if check_date(date)
 
       puts 'Please insert a valid date.'
-      sleep(1)
       return give_option('Last date played (DD/MM/YYYY): ')
     end
 
@@ -157,6 +160,55 @@ class App
       return Date.valid_date?(y.to_i, d.to_i, m.to_i)
     end
     false
+  end
+
+  def music_display
+    list_music
+  end
+
+  def genre_display
+    list_genre
+  end
+
+  def music_create
+    create_music
+  end
+
+  def save_files
+    instance_variables.each do |var|
+      file_name = var.to_s.chomp('_list').delete('@')
+      ary = []
+      instance_variable_get(var).each do |obj|
+        hash = { ref: obj, value: to_hash(obj) }
+        ary << hash
+      end
+      File.write("./data/#{file_name}.json", JSON.generate(ary))
+    end
+  end
+
+  def read_files
+    instance_variables.each do |var|
+      file_name = var.to_s.chomp('_list').delete('@')
+      if File.exist?("./data/#{file_name}.json") && File.read("./data/#{file_name}.json") != ''
+        ary = JSON.parse(File.read("./data/#{file_name}.json"))
+        case file_name
+        when 'music'
+          read_music(ary)
+        when 'genres'
+          read_genre(ary)
+        end
+      else
+        File.write("./data/#{file_name}.json", '[]')
+      end
+    end
+  end
+
+  def to_hash(object)
+    hash = {}
+    object.instance_variables.each do |var|
+      hash[var.to_s.delete('@')] = object.instance_variable_get(var)
+    end
+    hash
   end
 
   def add_elements(item, label, author, genre)

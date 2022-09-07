@@ -1,4 +1,8 @@
 require_relative './music_album'
+require_relative '../label'
+require_relative '../genre/genre'
+require_relative '../genre/genre_methods'
+require_relative '../item'
 
 def list_music
   @music_list.each_with_index do |music, index|
@@ -6,18 +10,46 @@ def list_music
   end
 end
 
-def create_music
-  puts 'Please enter the publish date'
+def create_music # rubocop:disable Metrics/MethodLength
+  puts 'Please enter the publish date (YYYY/MM/DD):'
   publish_date = gets.chomp
   puts 'Is it on Spotify? (true/false)'
   on_spotify = gets.chomp
+  puts 'Title:'
+  title = gets.chomp
+  puts 'Genre:'
+  genre = gets.chomp
+  puts 'Author:'
+  author = gets.chomp
+
   music = MusicAlbum.new(publish_date, on_spotify)
+  genre_music = Genre.new(genre)
+  label = Label.new(title, 'red')
+  author_music = Author.new(Random.rand(0..10_000), author, '')
+  music_item = Item.new(publish_date, Random.rand(0..10_000))
+
+  hash_genre = { 'value' => { 'id' => genre_music.id, 'name' => genre_music.name }, 'ref' => { 'music' => music } }
+  hash_label = { 'value' => { 'name' => label.title }, 'ref' => { 'music' => music_item.id } }
+  hash_author = { 'value' => { 'name' => author_music.first_name }, 'ref' => { 'music' => music_item.id } }
+
+  music_item.add_genre(hash_genre)
+  music_item.add_author(hash_author)
+  music_item.add_label(hash_label)
+
+  @items << music_item
+
+  @genres << genre_music
   @music_list << music
+  puts 'Music created successfully!'
 end
 
 def add_music(publish_date, on_spotify)
   music = MusicAlbum.new(publish_date, on_spotify)
   @music_list << music
+end
+
+def add_full_music(a_music)
+  @items << a_music
 end
 
 def list_labels
