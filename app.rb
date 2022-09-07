@@ -12,10 +12,9 @@ require_relative './file_helper'
 
 require_relative './library_data/load_data/read_games'
 require_relative './library_data/preserve_data/write_games'
-require 'json'
+# rubocop:disable all
 
-
-class App
+class App 
   attr_accessor :books, :music_list, :games, :authors, :labels, :genres
 
   def initialize
@@ -29,7 +28,6 @@ class App
     @items = []
 
     read_games_from_file
-
   end
 
   def book_display
@@ -166,7 +164,6 @@ class App
     false
   end
 
-
   def music_display
     list_music
   end
@@ -214,6 +211,7 @@ class App
       hash[var.to_s.delete('@')] = object.instance_variable_get(var)
     end
     hash
+  end
 
   def add_elements(item, label, author, genre)
     label.add_item(item)
@@ -236,6 +234,5 @@ class App
       puts "[#{label.id}] #{label.title} #{label.color}"
     end
     sleep(2)
-
   end
 end
