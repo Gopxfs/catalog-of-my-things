@@ -10,7 +10,7 @@ class Book < Item
     @cover_state = cover_state
     @archived = false
   end
-  
+
   private
 
   def can_be_archived?

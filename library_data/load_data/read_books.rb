@@ -13,6 +13,6 @@ def load_books
   books_data.each do |book|
     books.push(Book.new(book['publish_date'], book['publisher'], book['cover_state'], book['id']))
   end
-  
-  return books
+
+  books
 end

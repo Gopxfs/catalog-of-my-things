@@ -1,7 +1,7 @@
 require 'json'
 require_relative './save_books'
 
-def save_items(books, labels)
+def save_items(books, _labels)
   check_directory
   save_books(check_file('books'), books)
 end
@@ -13,5 +13,5 @@ end
 def check_file(name)
   file = "library_data/data/#{name}.json"
   File.new(file, 'w+') unless File.exist?(file)
-  return file
+  file
 end
