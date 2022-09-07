@@ -1,9 +1,11 @@
 require 'json'
 require_relative './save_books'
+require_relative './save_labels'
 
-def save_items(books, _labels)
+def save_items(books, labels)
   check_directory
   save_books(check_file('books'), books)
+  save_labels(check_file('labels'), labels)
 end
 
 def check_directory
