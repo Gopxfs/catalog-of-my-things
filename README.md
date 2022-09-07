@@ -9,7 +9,7 @@ Using OOP, we created a catalog where the user can add books, games and music al
 - SQL
 
 ## Video Presentation:
-[Check our video presentation about the project](https://drive.google.com/file/d/1JNt88GczT7MJ81UHPq71Oq4qXjrkJk5_/view).
+[Check our video presentation about the project](https://drive.google.com/drive/folders/1pPjRwBzThvzkzeN4mxfZzEDpewoyRbAa?usp=sharing).
 
 ## Getting Started
 - To get a local copy of this project clone this repository or download the Zip folder:
