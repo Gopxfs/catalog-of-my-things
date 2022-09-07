@@ -5,9 +5,9 @@ class Genre
   attr_accessor :name, :items
   attr_reader :id
 
-  def initialize(name)
+  def initialize(name, id = Random.rand(1..10_000))
     @name = name
-    @id = Random.rand(1..10_000)
+    @id = id
     @items = []
   end
 
