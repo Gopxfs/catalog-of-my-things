@@ -1,18 +1,4 @@
-require 'date'
-require './book'
-require './label'
-require './author'
-require_relative './genre/genre'
-require './game'
-require 'json'
-require_relative './music/music_methodes'
-require_relative './genre/genre_methods'
-require_relative './file_helper'
-require_relative './library_data/load_data/read_games'
-require_relative './library_data/preserve_data/write_games'
-require_relative './library_data/load_data/read_books'
-require_relative './library_data/load_data/read_labels'
-require 'json'
+require './requires'
 # rubocop:disable all
 
 class App 
@@ -21,11 +7,11 @@ class App
   def initialize
     @books = load_books
     @games = []
-    @music_list = []
+    @music_list = load_musics
     read_games_from_file
-    @authors = []
-    @labels = load_labels(@books, @games)
-    @genres = []
+    @authors = load_authors(@books, @games, @music_list)
+    @labels = load_labels(@books, @games, @music_list)
+    @genres = load_genres(@books, @games, @music_list)
   end
 
   def book_display
@@ -172,35 +158,6 @@ class App
 
   def music_create
     create_music
-  end
-
-  def save_files
-    instance_variables.each do |var|
-      file_name = var.to_s.chomp('_list').delete('@')
-      ary = []
-      instance_variable_get(var).each do |obj|
-        hash = { ref: obj, value: to_hash(obj) }
-        ary << hash
-      end
-      File.write("./data/#{file_name}.json", JSON.generate(ary))
-    end
-  end
-
-  def read_files
-    instance_variables.each do |var|
-      file_name = var.to_s.chomp('_list').delete('@')
-      if File.exist?("./data/#{file_name}.json") && File.read("./data/#{file_name}.json") != ''
-        ary = JSON.parse(File.read("./data/#{file_name}.json"))
-        case file_name
-        when 'music'
-          read_music(ary)
-        when 'genres'
-          read_genre(ary)
-        end
-      else
-        File.write("./data/#{file_name}.json", '[]')
-      end
-    end
   end
 
   def to_hash(object)
