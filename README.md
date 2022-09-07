@@ -1,12 +1,14 @@
 # Catalog of our things
-
-In this project, you will create a console app that will help you to keep a record of different types of things you own: books, music albums, movies, and games. Everything will be based on the UML class diagram presented below. The data will be stored in JSON files but you will also prepare a database with tables structure analogical to your program's class structure.
+Using OOP, we created a catalog where the user can add books, games and music albuns, having as properties genre, author, and label. It is possible to display a list of all elements by the UI displayed on the console. We followed the following UML diagram structure to also create a schema.sql:
+![image](https://user-images.githubusercontent.com/42799579/188950909-66f7bb00-dc45-47e8-8457-cf5669716c8d.png)
 
 ## Built With:
 
 - Ruby
-
 - SQL
+
+## Video Presentation:
+[Check our video presentation about the project]().
 
 ## Getting Started:
 To access and change the code on your computer (using GIT):
