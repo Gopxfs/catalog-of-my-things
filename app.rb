@@ -18,7 +18,7 @@ class App
     @music_albums = []
     @games = []
     @authors = []
-    @labels = load_labels
+    @labels = load_labels(@books)
     @genres = []
     read_games_from_file
   end
