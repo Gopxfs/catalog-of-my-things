@@ -12,31 +12,17 @@ Using OOP, we created a catalog where the user can add books, games and music al
 [Check our video presentation about the project](https://drive.google.com/file/d/1JNt88GczT7MJ81UHPq71Oq4qXjrkJk5_/view).
 
 ## Getting Started
-To get a local copy of this project:
-
-Clone this repository or download the Zip folder:
+- To get a local copy of this project clone this repository or download the Zip folder:
 git clone https://github.com/Gopxfs/catalog-of-my-things.git
 
-To get started, In the root directory run:
+- To get started, In the root directory run:
 gem install bundler
 
-Then run:
+- Then run:
 bundle install
 
-run ruby app in the Command Line:
+- Run ruby app in the Command Line:
 ruby main.rb
-
-### Setup
-
-- Open the repository [link](https://github.com/Gopxfs/catalog-of-my-things).
-
-- Click on the "Code" button, above the files list.
-
-- Select one of the three options to copy the URL: HTTPS, SSH key and GitHub CLI.
-
-- Open the Terminal in the directory you want to copy the project.
-
-- Type git clone, paste the URL you copied, and press enter.
 
 ### Usage
 
