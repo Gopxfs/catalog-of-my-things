@@ -17,10 +17,10 @@ class App
     @books = load_books
     @music_albums = []
     @games = []
-    @authors = []
-    @labels = load_labels(@books)
-    @genres = []
     read_games_from_file
+    @authors = []
+    @labels = load_labels(@books, @games)
+    @genres = []
   end
 
   def book_display
