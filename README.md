@@ -1,5 +1,6 @@
 # Catalog of our things
 Using OOP, we created a catalog where the user can add books, games and music albuns, having as properties genre, author, and label. It is possible to display a list of all elements by the UI displayed on the console. We followed the following UML diagram structure to also create a schema.sql:
+
 ![image](https://user-images.githubusercontent.com/42799579/188950909-66f7bb00-dc45-47e8-8457-cf5669716c8d.png)
 
 ## Built With:
