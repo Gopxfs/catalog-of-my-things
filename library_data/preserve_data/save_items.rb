@@ -1,16 +1,14 @@
 require 'json'
 
-def save_items(books)
+def save_items(books, labels)
   check_directory
   save_item('books', books)
+  save_item('labels', labels)
 end
 
 def save_item(file_name, items)
   file = check_file(file_name)
-
-  items.map {|item| JSON.generate(item)}
-  
-  File.write(file, JSON.generate(items))
+  #########
 end
 
 def check_directory

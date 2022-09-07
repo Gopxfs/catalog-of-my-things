@@ -6,8 +6,10 @@ def load_books
   return [] if File.zero?('./library_data/data/books.json')
 
   books = JSON.parse(File.read('./library_data/data/books.json'))
-  
+
   books.map {|book| JSON.parse(book.to_json, create_additions: true)}
+
+  p books[0].class
 
   return books
 end

@@ -10,17 +10,6 @@ class Book < Item
     @cover_state = cover_state
     @archived = false
   end
- 
-  def to_json(*args)
-    {
-      JSON.create_id => self.class.name,
-      'properties' => [publish_date, publisher, cover_state, id]
-    }.to_json(*args)
-  end
-
-  def self.json_create(object)
-    new(*object['properties'])
-  end
   
   private
 
